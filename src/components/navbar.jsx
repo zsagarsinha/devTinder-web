@@ -1,7 +1,9 @@
-import React from 'react'
-import Logo from "./components/Logo";
+import { useSelector } from "react-redux"
+import Logo from "./logo"
 
 const Navbar = () => {
+    const user = useSelector((state) => state.user);
+    console.log(user);
   return (
     <div><div className="navbar bg-[#0E1020] shadow-sm">
   <div className="flex-1">
@@ -24,12 +26,14 @@ const Navbar = () => {
 </a>
   </div>
   <div className="flex gap-2">
-    <div className="dropdown dropdown-end mx-5">
-      <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-        <div className="w-10 rounded-full">
-          <img
-            alt="Tailwind CSS Navbar component"
-            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+   {user && (
+      <div className="dropdown dropdown-end mx-5 flex tems-center gap -2">
+       <p className="px-4 py-2">Welcome, {user.firstName}</p>
+        <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+          <div className="w-10 rounded-full">
+            <img
+              alt="User Photo"
+              src={user.photoUrl} />
         </div>
       </div>
       <ul
@@ -44,7 +48,7 @@ const Navbar = () => {
         <li><a>Settings</a></li>
         <li><a>Logout</a></li>
       </ul>
-    </div>
+    </div>)}
   </div>
 </div></div>
   )
